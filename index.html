@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -18,6 +17,8 @@
     --purple-soft:#EFEBFF;
     --orange:#F1602E;
     --orange-soft:#FFE9E1;
+    --green:#1f9d5c;
+    --green-soft:#E5F6EE;
     --line:#E7E7F0;
     --radius:18px;
     --maxw:1160px;
@@ -74,6 +75,9 @@
   .hero h1{font-size:clamp(2rem,4.2vw,3rem); line-height:1.15; letter-spacing:-0.01em;}
   .hero p.lead{color:var(--text-dim); font-size:1.08rem; margin-top:20px; max-width:44ch;}
   .hero .ctas{display:flex; gap:14px; margin-top:34px; flex-wrap:wrap;}
+  .hero .trust{display:flex; gap:22px; margin-top:36px; flex-wrap:wrap;}
+  .hero .trust div{font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--text-dim);}
+  .hero .trust strong{display:block; font-family:'Sora',sans-serif; font-size:1.15rem; color:var(--text); font-weight:700;}
 
   /* hero dashboard mock visual */
   .hero-visual{
@@ -106,6 +110,23 @@
   .section-head h2{font-size:1.8rem;}
   .section-head p{color:var(--text-dim); margin-top:12px;}
 
+  /* ---------- SOBRE MÍ ---------- */
+  .about .wrap{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start;}
+  @media (max-width:860px){ .about .wrap{grid-template-columns:1fr;} }
+  .about-card{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:30px;}
+  .about-card p{color:var(--text-dim); font-size:0.98rem; margin:0 0 14px;}
+  .about-card p:last-child{margin-bottom:0;}
+  .about-stats{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:28px;}
+  @media (max-width:500px){ .about-stats{grid-template-columns:1fr;} }
+  .about-stat{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:18px 16px;}
+  .about-stat strong{display:block; font-family:'Sora',sans-serif; font-size:1.5rem; color:var(--purple);}
+  .about-stat span{font-size:0.82rem; color:var(--text-dim);}
+  .value-list{display:flex; flex-direction:column; gap:14px; margin-top:8px;}
+  .value-item{display:flex; gap:14px; align-items:flex-start; background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px;}
+  .value-item .dot{flex-shrink:0; width:10px; height:10px; border-radius:3px; background:var(--orange); margin-top:6px;}
+  .value-item h3{font-size:0.98rem; margin-bottom:4px;}
+  .value-item p{margin:0; color:var(--text-dim); font-size:0.9rem;}
+
   /* ---------- CATALOG ---------- */
   .catalog{display:grid; grid-template-columns:repeat(2,1fr); gap:18px;}
   @media (max-width:800px){ .catalog{grid-template-columns:1fr;} }
@@ -113,8 +134,15 @@
     text-align:left; width:100%; border:1px solid var(--line); border-radius:var(--radius);
     background:var(--panel); padding:24px; cursor:pointer; color:var(--text); font-family:inherit;
     transition:border-color .2s, transform .2s, box-shadow .2s; display:flex; flex-direction:column; gap:10px;
+    position:relative;
   }
   .endpoint-card:hover, .endpoint-card:focus-visible{border-color:var(--purple-2); transform:translateY(-3px); box-shadow:0 20px 40px -24px rgba(40,20,110,0.35);}
+  .endpoint-card.featured{border-color:var(--orange); background:linear-gradient(180deg,#fff 0%,var(--orange-soft) 220%);}
+  .featured-flag{
+    position:absolute; top:-11px; right:20px; background:var(--orange); color:#fff;
+    font-family:'JetBrains Mono',monospace; font-size:0.66rem; font-weight:700; letter-spacing:0.04em;
+    padding:5px 11px; border-radius:999px; text-transform:uppercase; box-shadow:0 8px 16px -6px rgba(241,96,46,0.6);
+  }
   .card-top{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
   .method{font-family:'JetBrains Mono',monospace; font-size:0.7rem; font-weight:700; letter-spacing:0.03em; padding:5px 10px; border-radius:6px; flex-shrink:0;}
   .method.post{background:#E5F6EE; color:#1f9d5c;}
@@ -125,6 +153,10 @@
   .endpoint-title{font-family:'Sora',sans-serif; font-size:1.08rem;}
   .card-teaser{color:var(--text-dim); font-size:0.88rem; margin:0;}
   .card-cta{font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--purple); margin-top:auto;}
+
+  /* clothing swatch strip inside featured card */
+  .swatch-strip{display:flex; gap:7px; margin-top:2px;}
+  .swatch{width:20px; height:20px; border-radius:6px; border:1px solid rgba(0,0,0,0.08);}
 
   /* ---------- MODAL ---------- */
   .modal-overlay{position:fixed; inset:0; background:rgba(27,30,43,0.45); backdrop-filter:blur(3px); display:flex; align-items:center; justify-content:center; padding:20px; z-index:100;}
@@ -144,13 +176,14 @@
   .pricing-row .model{font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:var(--orange);}
   .pricing-row .client{font-size:0.82rem; color:var(--text-dim);}
 
-  /* ---------- STACK ---------- */
-  .stack-groups{display:grid; grid-template-columns:repeat(4,1fr); gap:24px;}
-  @media (max-width:900px){ .stack-groups{grid-template-columns:repeat(2,1fr);} }
-  @media (max-width:520px){ .stack-groups{grid-template-columns:1fr;} }
-  .stack-group h3{font-family:'JetBrains Mono',monospace; font-size:0.76rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:14px; font-weight:600;}
-  .badge-list{display:flex; flex-wrap:wrap; gap:8px;}
-  .badge{font-family:'JetBrains Mono',monospace; font-size:0.78rem; padding:7px 13px; border-radius:8px; border:1px solid var(--line); color:var(--text); background:var(--panel);}
+  /* ---------- PROCESO ---------- */
+  .process-list{display:grid; grid-template-columns:repeat(4,1fr); gap:20px; position:relative;}
+  @media (max-width:900px){ .process-list{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:520px){ .process-list{grid-template-columns:1fr;} }
+  .process-step{background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:22px 18px;}
+  .process-step .num{font-family:'JetBrains Mono',monospace; color:var(--purple-2); font-weight:700; font-size:0.85rem; margin-bottom:10px;}
+  .process-step h3{font-size:0.98rem; margin-bottom:6px;}
+  .process-step p{margin:0; color:var(--text-dim); font-size:0.86rem;}
 
   /* ---------- CONTACT ---------- */
   .contact-panel{
@@ -183,7 +216,8 @@
     <div class="brand">SKILL SOFWARE <span class="tag">/ Sistemas de Ventas</span></div>
     <div class="navlinks">
       <a href="#catalogo">Soluciones</a>
-      <a href="#stack">Stack</a>
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#proceso">Cómo trabajo</a>
     </div>
     <a class="btn btn-primary" href="#contacto">Contacto</a>
   </div>
@@ -194,10 +228,15 @@
     <div>
       <div class="eyebrow">Solución para sistemas de ventas</div>
       <h1>La solución para que tu negocio venda y controle todo desde un solo sistema.</h1>
-      <p class="lead">Sistemas de ventas, inventario y automatización a medida para pymes y emprendedores.</p>
+      <p class="lead">Sistemas de ventas, inventario y automatización a medida para pymes y emprendedores. Un solo desarrollador, un solo punto de contacto, entrega ordenada de principio a fin.</p>
       <div class="ctas">
         <a class="btn btn-primary" href="https://wa.me/51950654906" target="_blank" rel="noopener">Conéctate conmigo</a>
         <a class="btn btn-outline" href="#catalogo">Ver catálogo de soluciones</a>
+      </div>
+      <div class="trust">
+        <div><strong>100%</strong>a medida, no plantillas genéricas</div>
+        <div><strong>1 canal</strong>directo conmigo, sin intermediarios</div>
+        <div><strong>Soporte</strong>después de la entrega</div>
       </div>
     </div>
     <div class="hero-visual" role="img" aria-label="Panel de ventas de ejemplo con estadísticas y gráfico de barras">
@@ -217,6 +256,49 @@
     </div>
   </div>
 </header>
+
+<section id="sobre-mi" class="about">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Sobre mí</div>
+      <h2 style="font-size:1.8rem; margin-bottom:22px;">Desarrollo sistemas para que tu negocio deje de depender del papel y la memoria.</h2>
+      <div class="about-card">
+        <p>Soy Pelayo Quispe, desarrollador de software egresado del Instituto SISE. Me formé haciendo prácticas construyendo sistemas reales para empresas: APIs, bases de datos y automatizaciones que hoy siguen funcionando en producción.</p>
+        <p>Trabajo directo contigo, sin agencias ni intermediarios: yo levanto el requerimiento, yo diseño el sistema y yo te lo entrego funcionando, con documentación clara para que tu equipo lo use sin depender de mí para todo.</p>
+        <p>Mi objetivo no es venderte "tecnología", es resolver el problema puntual que te hace perder ventas, tiempo o control sobre tu negocio.</p>
+      </div>
+      <div class="about-stats">
+        <div class="about-stat"><strong>4</strong><span>tipos de sistemas listos para adaptar</span></div>
+        <div class="about-stat"><strong>1:1</strong><span>trato directo, sin tercerizar tu proyecto</span></div>
+        <div class="about-stat"><strong>Sí</strong><span>soporte y ajustes después de la entrega</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="value-list">
+        <div class="value-item">
+          <span class="dot"></span>
+          <div><h3>Sistemas hechos a tu medida</h3><p>No parto de una plantilla: el sistema se diseña alrededor de cómo trabaja tu negocio hoy.</p></div>
+        </div>
+        <div class="value-item">
+          <span class="dot"></span>
+          <div><h3>Comunicación directa y clara</h3><p>Hablas conmigo por WhatsApp o correo, sin formularios ni mesas de ayuda impersonales.</p></div>
+        </div>
+        <div class="value-item">
+          <span class="dot"></span>
+          <div><h3>Entrega con documentación</h3><p>Cada sistema se entrega con manual de uso, para que tu equipo no dependa de memorizar nada.</p></div>
+        </div>
+        <div class="value-item">
+          <span class="dot"></span>
+          <div><h3>Precios claros desde el inicio</h3><p>Sabes el modelo de cobro (pago único o suscripción) antes de empezar, sin sorpresas.</p></div>
+        </div>
+        <div class="value-item">
+          <span class="dot"></span>
+          <div><h3>Acompañamiento post-entrega</h3><p>El trabajo no termina al entregar: quedo disponible para ajustes y dudas.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section id="catalogo">
   <div class="wrap">
@@ -242,7 +324,7 @@
     <div class="modal-body">
       <div class="field-label">Problema que resuelve</div>
       <p id="modalProblem"></p>
-      <div class="field-label">Entregables técnicos</div>
+      <div class="field-label">Entregables</div>
       <ul id="modalEntregables"></ul>
       <div class="pricing-row">
         <span class="model" id="modalModel"></span>
@@ -252,46 +334,33 @@
   </div>
 </div>
 
-<section id="stack">
+<section id="proceso">
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow">Stack técnico</div>
-      <h2>Herramientas con las que construyo.</h2>
+      <div class="eyebrow">Cómo trabajo</div>
+      <h2>Un proceso simple, sin vueltas.</h2>
+      <p>Cuatro pasos, del primer mensaje al sistema funcionando.</p>
     </div>
-    <div class="stack-groups">
-      <div class="stack-group">
-        <h3>Backend</h3>
-        <div class="badge-list">
-          <span class="badge">PHP / Laravel</span>
-          <span class="badge">C# / .NET</span>
-          <span class="badge">Java / Spring Boot</span>
-          <span class="badge">Node.js</span>
-        </div>
+    <div class="process-list">
+      <div class="process-step">
+        <div class="num">01</div>
+        <h3>Diagnóstico</h3>
+        <p>Me cuentas cómo vendes y controlas tu negocio hoy, y detectamos juntos dónde estás perdiendo tiempo o dinero.</p>
       </div>
-      <div class="stack-group">
-        <h3>Frontend</h3>
-        <div class="badge-list">
-          <span class="badge">Angular</span>
-          <span class="badge">HTML / CSS</span>
-          <span class="badge">Bootstrap / Tailwind</span>
-        </div>
+      <div class="process-step">
+        <div class="num">02</div>
+        <h3>Propuesta y alcance</h3>
+        <p>Te envío qué se va a construir, en cuánto tiempo y bajo qué modelo de pago, antes de empezar.</p>
       </div>
-      <div class="stack-group">
-        <h3>Bases de datos</h3>
-        <div class="badge-list">
-          <span class="badge">SQL Server</span>
-          <span class="badge">MySQL</span>
-          <span class="badge">Oracle</span>
-        </div>
+      <div class="process-step">
+        <div class="num">03</div>
+        <h3>Desarrollo</h3>
+        <p>Construyo el sistema con avances periódicos para que veas el progreso, no una entrega a ciegas.</p>
       </div>
-      <div class="stack-group">
-        <h3>Herramientas</h3>
-        <div class="badge-list">
-          <span class="badge">Postman / Swagger</span>
-          <span class="badge">Git / GitHub</span>
-          <span class="badge">Telegram Bot API</span>
-          <span class="badge">Entity Framework</span>
-        </div>
+      <div class="process-step">
+        <div class="num">04</div>
+        <h3>Entrega y soporte</h3>
+        <p>Recibes el sistema funcionando, con manual de uso, y quedo disponible para ajustes posteriores.</p>
       </div>
     </div>
   </div>
@@ -332,55 +401,57 @@
   /* ---------- Catalog + modal ---------- */
   const packages = [
     {
-      method:'POST', methodClass:'post', path:'/sistema-gestion-ventas',
-      title:'Sistema de Gestión de Ventas e Inventario',
-      teaser:'Ventas, stock y caja controlados a mano — pérdida de tiempo y dinero.',
-      problem:'Ventas, stock y caja controlados a mano en Excel o cuadernos: pérdidas por desorden, sin reportes reales de qué se vende y qué falta.',
-      entregables:['Backend en Laravel o .NET con API REST','Panel administrativo (Angular)','Base de datos relacional (MySQL / SQL Server)','Reportes de ventas, stock y caja'],
+      method:'DESTACADO', methodClass:'post', path:'/sistema-ventas-ropa', featured:true,
+      title:'Sistema de Ventas para Tiendas de Ropa',
+      teaser:'Control de tallas, colores y temporadas, sin perder ninguna venta.',
+      problem:'En una tienda de ropa cada prenda tiene talla, color y temporada. Llevarlo en cuadernos o Excel hace que pierdas ventas por no saber el stock real, o vendas algo que ya no tienes.',
+      entregables:['Catálogo de productos organizado por talla, color y temporada','Control de stock en tiempo real por cada variante de producto','Reportes de ventas por prenda, categoría y temporada','Panel para armar promociones, combos y liquidaciones'],
       model:'Modelo: pago único por proyecto + mantenimiento mensual opcional',
-      client:'Ideal para: tiendas, restaurantes, pymes de servicios'
+      client:'Ideal para: boutiques, tiendas de ropa, emprendimientos de moda'
     },
     {
-      method:'AUTOMATE', methodClass:'auto', path:'/automatizacion-bots',
-      title:'Automatización de Procesos con Bots',
-      teaser:'Tiempo perdido respondiendo lo mismo: pedidos, recordatorios, seguimiento.',
-      problem:'Tiempo perdido respondiendo lo mismo una y otra vez: pedidos, recordatorios, confirmaciones y seguimiento manual por chat.',
-      entregables:['Bot de Telegram/WhatsApp conectado a tu backend','Automatización de notificaciones y pedidos','Integración con tu base de datos actual','Panel simple de monitoreo de mensajes'],
-      model:'Modelo: fee de implementación + suscripción mensual (SaaS)',
-      client:'Ideal para: delivery, agencias, atención al cliente'
+      method:'AUTOMATIZA', methodClass:'auto', path:'/sistema-lavanderia',
+      title:'Sistema de Gestión para Lavanderías',
+      teaser:'Prendas perdidas o entregadas a destiempo por llevar el control a mano.',
+      problem:'Sin un control ordenado, es fácil perder de vista qué prenda es de quién, cuándo entró, cuándo debe salir y quién ya pagó, sobre todo en horas de más movimiento.',
+      entregables:['Registro de cada prenda por cliente, con ticket y estado (recibido, en proceso, listo, entregado)','Notificaciones automáticas cuando el pedido está listo para recoger','Control de pagos y pendientes por cliente','Reportes de prendas procesadas, tiempos de entrega e ingresos'],
+      model:'Modelo: pago único por proyecto + mantenimiento mensual opcional',
+      client:'Ideal para: lavanderías, tintorerías, negocios de planchado'
     },
     {
-      method:'GET', methodClass:'get', path:'/integracion-apis',
-      title:'Integración y Documentación de APIs',
-      teaser:'Tus sistemas no se hablan entre sí: todo se cruza a mano.',
-      problem:'Sistemas que no se hablan entre sí: tu ecommerce, tu facturación y tu CRM viven en islas separadas y todo se cruza a mano.',
-      entregables:['Integración de APIs REST entre tus sistemas','Documentación completa (Swagger / Postman)','Pruebas unitarias de cada integración','Manual de uso para tu equipo'],
-      model:'Modelo: cotización por alcance o por horas',
-      client:'Ideal para: empresas con varios sistemas ya instalados'
+      method:'CONECTA', methodClass:'get', path:'/sistema-ventas-cevicheria',
+      title:'Sistema de Ventas para Cevicherías',
+      teaser:'Comandas cruzadas y mesas con cuentas mezcladas por llevar todo a mano.',
+      problem:'En hora punta, tomar el pedido en papel hace que se crucen las comandas, se mezclen las cuentas entre mesas y se pierda de vista qué platos se están agotando en cocina.',
+      entregables:['Toma de pedidos por mesa, con envío directo a cocina','Control de cuentas por mesa: dividir, unir y cerrar sin errores','Control de stock de insumos y platos del día','Reportes de ventas por plato, mesero y horario de mayor movimiento'],
+      model:'Modelo: pago único por proyecto + mantenimiento mensual opcional',
+      client:'Ideal para: cevicherías, restaurantes y negocios de comida'
     },
     {
-      method:'PUT', methodClass:'put', path:'/panel-administrativo',
-      title:'Panel Administrativo / Portal Web a Medida',
-      teaser:'La información del negocio repartida en archivos, chats y memoria.',
-      problem:'No hay un solo lugar donde ver cómo va el negocio: la información está repartida en archivos, chats y memoria de alguien.',
-      entregables:['Frontend a medida (Angular)','Backend en Java/Spring Boot o .NET','Base de datos + modelado relacional (ERD)','Configuración y despliegue en servidor'],
+      method:'CENTRALIZA', methodClass:'put', path:'/sistema-ventas-abarrotes',
+      title:'Sistema de Ventas para Bodegas y Abarrotes',
+      teaser:'Precios y stock que no cuadran por llevar la venta al ojo.',
+      problem:'Vender al detalle sin un sistema hace que el stock nunca cuadre con lo que hay en el estante, se pierdan ofertas por vencer y no quede claro cuánto se ganó en el día.',
+      entregables:['Registro de ventas rápido, por código de barras o por nombre del producto','Control de stock con aviso de productos por agotarse o por vencer','Manejo de precios, promociones y venta al por mayor','Reportes de venta diaria, productos más vendidos y ganancia real'],
       model:'Modelo: pago único + mantenimiento opcional',
-      client:'Ideal para: emprendedores y empresas en crecimiento'
+      client:'Ideal para: bodegas, minimarkets y negocios de abarrotes'
     }
   ];
 
   const grid = document.getElementById('catalogGrid');
   packages.forEach((p, idx) => {
     const card = document.createElement('button');
-    card.className = 'endpoint-card';
+    card.className = 'endpoint-card' + (p.featured ? ' featured' : '');
     card.setAttribute('type','button');
     card.innerHTML = `
+      ${p.featured ? '<span class="featured-flag">Muy pedido</span>' : ''}
       <div class="card-top">
         <span class="method ${p.methodClass}">${p.method}</span>
         <span class="path">${p.path}</span>
       </div>
       <div class="endpoint-title">${p.title}</div>
       <p class="card-teaser">${p.teaser}</p>
+      ${p.featured ? '<div class="swatch-strip" aria-hidden="true"><span class="swatch" style="background:#1B1E2B"></span><span class="swatch" style="background:#F1602E"></span><span class="swatch" style="background:#5B3FE0"></span><span class="swatch" style="background:#E7E7F0"></span></div>' : ''}
       <span class="card-cta">Ver detalle →</span>
     `;
     card.addEventListener('click', () => openModal(idx));
