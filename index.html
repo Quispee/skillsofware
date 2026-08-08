@@ -1,1 +1,426 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pelayo Quispe · Sistemas de Ventas para Negocios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F6F6FB;
+    --panel:#FFFFFF;
+    --text:#1B1E2B;
+    --text-dim:#6B7280;
+    --purple:#5B3FE0;
+    --purple-2:#8B7BFF;
+    --purple-soft:#EFEBFF;
+    --orange:#F1602E;
+    --orange-soft:#FFE9E1;
+    --line:#E7E7F0;
+    --radius:18px;
+    --maxw:1160px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:'Inter',sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+  h1,h2,h3{font-family:'Sora',sans-serif; margin:0; color:var(--text); font-weight:700;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:inherit;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+  section{padding:88px 0;}
+  @media (max-width:720px){ section{padding:56px 0;} }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:50; background:rgba(246,246,251,0.9);
+    backdrop-filter:blur(10px); border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px;}
+  .brand{display:flex; align-items:baseline; gap:8px; font-family:'Sora',sans-serif; font-weight:700; font-size:1.1rem;}
+  .brand .tag{font-family:'Inter',sans-serif; font-weight:400; font-size:0.85rem; color:var(--text-dim);}
+  .navlinks{display:flex; gap:30px; font-size:0.92rem; color:var(--text-dim); font-weight:500;}
+  .navlinks a{text-decoration:none; transition:color .2s;}
+  .navlinks a:hover, .navlinks a:focus-visible{color:var(--text);}
+  @media (max-width:760px){ .navlinks{display:none;} }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; padding:13px 26px; border-radius:999px;
+    text-decoration:none; font-family:'Sora',sans-serif; font-size:0.9rem; font-weight:600;
+    border:1.5px solid transparent; transition:all .2s; cursor:pointer;
+  }
+  .btn-primary{background:var(--orange); color:#fff; box-shadow:0 10px 24px -8px rgba(241,96,46,0.55);}
+  .btn-primary:hover, .btn-primary:focus-visible{background:#d94f21; transform:translateY(-1px);}
+  .btn-outline{background:transparent; color:var(--purple); border-color:var(--purple-2);}
+  .btn-outline:hover, .btn-outline:focus-visible{background:var(--purple-soft);}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--purple); outline-offset:2px;}
+
+  /* ---------- HERO ---------- */
+  .hero{padding-top:76px; padding-bottom:40px; overflow:hidden;}
+  .hero .wrap{display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center;}
+  @media (max-width:900px){ .hero .wrap{grid-template-columns:1fr;} }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace; color:var(--purple); font-size:0.78rem; font-weight:600;
+    letter-spacing:0.08em; text-transform:uppercase; margin-bottom:16px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:""; width:20px; height:2px; background:var(--orange); border-radius:2px;}
+  .hero h1{font-size:clamp(2rem,4.2vw,3rem); line-height:1.15; letter-spacing:-0.01em;}
+  .hero p.lead{color:var(--text-dim); font-size:1.08rem; margin-top:20px; max-width:44ch;}
+  .hero .ctas{display:flex; gap:14px; margin-top:34px; flex-wrap:wrap;}
+
+  /* hero dashboard mock visual */
+  .hero-visual{
+    position:relative; background:var(--panel); border-radius:24px; padding:26px;
+    box-shadow:0 40px 80px -30px rgba(40,20,110,0.28); overflow:hidden; border:1px solid var(--line);
+  }
+  .hero-visual::before, .hero-visual::after{
+    content:""; position:absolute; width:260px; height:64px; right:-70px; z-index:2;
+  }
+  .hero-visual::before{ top:-36px; background:linear-gradient(135deg,var(--purple),var(--purple-2)); transform:rotate(40deg); }
+  .hero-visual::after{ top:-4px; background:linear-gradient(135deg,var(--purple-2),#c9c1ff); opacity:0.7; transform:rotate(40deg); right:-100px; }
+  .hero-visual-inner{position:relative; z-index:1;}
+  .mock-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;}
+  .mock-head .title{font-family:'Sora',sans-serif; font-weight:700; font-size:0.95rem;}
+  .mock-live{display:flex; align-items:center; gap:6px; font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:#1f9d5c;}
+  .mock-live .dot{width:7px; height:7px; border-radius:50%; background:#1f9d5c; box-shadow:0 0 0 3px #1f9d5c22;}
+  .mock-stats{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:22px;}
+  .mock-stat{background:var(--bg); border:1px solid var(--line); border-radius:12px; padding:12px 10px;}
+  .mock-stat .k{font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:var(--text-dim);}
+  .mock-stat .v{font-family:'Sora',sans-serif; font-weight:700; font-size:1.05rem; margin-top:4px;}
+  .mock-chart{display:flex; align-items:flex-end; gap:8px; height:110px; padding:0 2px;}
+  .mock-bar{flex:1; border-radius:6px 6px 2px 2px; background:linear-gradient(180deg,var(--orange),var(--purple)); animation:growBar .8s ease forwards; transform-origin:bottom; transform:scaleY(0);}
+  @keyframes growBar{to{transform:scaleY(1);}}
+  .mock-chart-labels{display:flex; gap:8px; margin-top:8px;}
+  .mock-chart-labels span{flex:1; text-align:center; font-family:'JetBrains Mono',monospace; font-size:0.65rem; color:var(--text-dim);}
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section-head{margin-bottom:44px; max-width:60ch;}
+  .section-head .eyebrow{margin-bottom:12px;}
+  .section-head h2{font-size:1.8rem;}
+  .section-head p{color:var(--text-dim); margin-top:12px;}
+
+  /* ---------- CATALOG ---------- */
+  .catalog{display:grid; grid-template-columns:repeat(2,1fr); gap:18px;}
+  @media (max-width:800px){ .catalog{grid-template-columns:1fr;} }
+  .endpoint-card{
+    text-align:left; width:100%; border:1px solid var(--line); border-radius:var(--radius);
+    background:var(--panel); padding:24px; cursor:pointer; color:var(--text); font-family:inherit;
+    transition:border-color .2s, transform .2s, box-shadow .2s; display:flex; flex-direction:column; gap:10px;
+  }
+  .endpoint-card:hover, .endpoint-card:focus-visible{border-color:var(--purple-2); transform:translateY(-3px); box-shadow:0 20px 40px -24px rgba(40,20,110,0.35);}
+  .card-top{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+  .method{font-family:'JetBrains Mono',monospace; font-size:0.7rem; font-weight:700; letter-spacing:0.03em; padding:5px 10px; border-radius:6px; flex-shrink:0;}
+  .method.post{background:#E5F6EE; color:#1f9d5c;}
+  .method.auto{background:var(--orange-soft); color:#c94a1f;}
+  .method.put{background:var(--purple-soft); color:var(--purple);}
+  .method.get{background:#E5F1FB; color:#1c6fb0;}
+  .path{font-family:'JetBrains Mono',monospace; font-size:0.82rem; color:var(--text-dim);}
+  .endpoint-title{font-family:'Sora',sans-serif; font-size:1.08rem;}
+  .card-teaser{color:var(--text-dim); font-size:0.88rem; margin:0;}
+  .card-cta{font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--purple); margin-top:auto;}
+
+  /* ---------- MODAL ---------- */
+  .modal-overlay{position:fixed; inset:0; background:rgba(27,30,43,0.45); backdrop-filter:blur(3px); display:flex; align-items:center; justify-content:center; padding:20px; z-index:100;}
+  .modal-overlay[hidden]{display:none;}
+  .modal{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); max-width:560px; width:100%; max-height:85vh; overflow-y:auto; position:relative; box-shadow:0 40px 90px -30px rgba(20,10,60,0.4);}
+  .modal-close{position:absolute; top:16px; right:16px; background:var(--bg); border:1px solid var(--line); color:var(--text-dim); width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:0.9rem;}
+  .modal-close:hover{color:var(--text); border-color:var(--purple-2);}
+  .modal-head{display:flex; align-items:center; gap:14px; padding:24px 50px 20px 24px; border-bottom:1px solid var(--line); flex-wrap:wrap;}
+  .modal-head .path{font-size:0.92rem;}
+  .modal-body{padding:22px 24px 26px;}
+  .field-label{font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px; margin-top:20px;}
+  .field-label:first-child{margin-top:0;}
+  .modal-body p{margin:0; color:var(--text-dim); font-size:0.94rem;}
+  .modal-body ul{margin:0; padding-left:18px; color:var(--text-dim); font-size:0.94rem;}
+  .modal-body li{margin-bottom:5px;}
+  .pricing-row{display:flex; justify-content:space-between; align-items:center; padding-top:18px; margin-top:20px; border-top:1px dashed var(--line); flex-wrap:wrap; gap:10px;}
+  .pricing-row .model{font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:var(--orange);}
+  .pricing-row .client{font-size:0.82rem; color:var(--text-dim);}
+
+  /* ---------- STACK ---------- */
+  .stack-groups{display:grid; grid-template-columns:repeat(4,1fr); gap:24px;}
+  @media (max-width:900px){ .stack-groups{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:520px){ .stack-groups{grid-template-columns:1fr;} }
+  .stack-group h3{font-family:'JetBrains Mono',monospace; font-size:0.76rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:14px; font-weight:600;}
+  .badge-list{display:flex; flex-wrap:wrap; gap:8px;}
+  .badge{font-family:'JetBrains Mono',monospace; font-size:0.78rem; padding:7px 13px; border-radius:8px; border:1px solid var(--line); color:var(--text); background:var(--panel);}
+
+  /* ---------- CONTACT ---------- */
+  .contact-panel{
+    position:relative; overflow:hidden; border-radius:28px; padding:56px 44px; text-align:center;
+    background:linear-gradient(120deg,var(--purple) 0%, #7A5CF0 55%, var(--orange) 130%);
+    color:#fff;
+  }
+  @media (max-width:600px){ .contact-panel{padding:40px 22px;} }
+  .contact-panel::before{ content:""; position:absolute; width:340px; height:90px; top:-40px; right:-80px; background:rgba(255,255,255,0.18); transform:rotate(35deg); }
+  .contact-panel .eyebrow{color:#FFE3D6; justify-content:center;}
+  .contact-panel .eyebrow::before{background:#fff;}
+  .contact-panel h2{font-size:1.8rem; max-width:26ch; margin:0 auto; color:#fff;}
+  .contact-panel p{color:#EAE6FF; margin-top:14px; max-width:42ch; margin-left:auto; margin-right:auto;}
+  .contact-links{display:flex; justify-content:center; gap:14px; margin-top:32px; flex-wrap:wrap; position:relative; z-index:1;}
+  .contact-links a{
+    display:flex; align-items:center; gap:8px; font-family:'JetBrains Mono',monospace; font-size:0.85rem;
+    border:1.5px solid rgba(255,255,255,0.4); padding:11px 18px; border-radius:999px; text-decoration:none; color:#fff;
+    transition:all .2s; background:rgba(255,255,255,0.08);
+  }
+  .contact-links a:hover, .contact-links a:focus-visible{background:#fff; color:var(--purple); border-color:#fff;}
+
+  footer{border-top:1px solid var(--line); padding:26px 0; text-align:center;}
+  footer p{color:var(--text-dim); font-size:0.8rem; font-family:'JetBrains Mono',monospace;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">SKILL SOFWARE <span class="tag">/ Sistemas de Ventas</span></div>
+    <div class="navlinks">
+      <a href="#catalogo">Soluciones</a>
+      <a href="#stack">Stack</a>
+    </div>
+    <a class="btn btn-primary" href="#contacto">Contacto</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Solución para sistemas de ventas</div>
+      <h1>La solución para que tu negocio venda y controle todo desde un solo sistema.</h1>
+      <p class="lead">Sistemas de ventas, inventario y automatización a medida para pymes y emprendedores.</p>
+      <div class="ctas">
+        <a class="btn btn-primary" href="https://wa.me/51950654906" target="_blank" rel="noopener">Conéctate conmigo</a>
+        <a class="btn btn-outline" href="#catalogo">Ver catálogo de soluciones</a>
+      </div>
+    </div>
+    <div class="hero-visual" role="img" aria-label="Panel de ventas de ejemplo con estadísticas y gráfico de barras">
+      <div class="hero-visual-inner">
+        <div class="mock-head">
+          <div class="title">Panel de Ventas</div>
+          <div class="mock-live"><span class="dot"></span>En vivo</div>
+        </div>
+        <div class="mock-stats">
+          <div class="mock-stat"><div class="k">VENTAS HOY</div><div class="v">S/ 2,480</div></div>
+          <div class="mock-stat"><div class="k">PEDIDOS</div><div class="v">34</div></div>
+          <div class="mock-stat"><div class="k">STOCK BAJO</div><div class="v">5</div></div>
+        </div>
+        <div class="mock-chart" id="mockChart"></div>
+        <div class="mock-chart-labels"><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="catalogo">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Catálogo de soluciones</div>
+      <h2>Cuatro sistemas listos para tu negocio. Toca uno para ver el detalle.</h2>
+      <p>Cada solución resuelve un problema concreto, con entregables definidos desde el inicio.</p>
+    </div>
+    <div class="catalog" id="catalogGrid"></div>
+  </div>
+</section>
+
+<div class="modal-overlay" id="modalOverlay" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="modalClose" aria-label="Cerrar">✕</button>
+    <div class="modal-head">
+      <span class="method" id="modalMethod"></span>
+      <div>
+        <div class="path" id="modalPath"></div>
+        <div class="endpoint-title" id="modalTitle"></div>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="field-label">Problema que resuelve</div>
+      <p id="modalProblem"></p>
+      <div class="field-label">Entregables técnicos</div>
+      <ul id="modalEntregables"></ul>
+      <div class="pricing-row">
+        <span class="model" id="modalModel"></span>
+        <span class="client" id="modalClient"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="stack">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Stack técnico</div>
+      <h2>Herramientas con las que construyo.</h2>
+    </div>
+    <div class="stack-groups">
+      <div class="stack-group">
+        <h3>Backend</h3>
+        <div class="badge-list">
+          <span class="badge">PHP / Laravel</span>
+          <span class="badge">C# / .NET</span>
+          <span class="badge">Java / Spring Boot</span>
+          <span class="badge">Node.js</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <h3>Frontend</h3>
+        <div class="badge-list">
+          <span class="badge">Angular</span>
+          <span class="badge">HTML / CSS</span>
+          <span class="badge">Bootstrap / Tailwind</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <h3>Bases de datos</h3>
+        <div class="badge-list">
+          <span class="badge">SQL Server</span>
+          <span class="badge">MySQL</span>
+          <span class="badge">Oracle</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <h3>Herramientas</h3>
+        <div class="badge-list">
+          <span class="badge">Postman / Swagger</span>
+          <span class="badge">Git / GitHub</span>
+          <span class="badge">Telegram Bot API</span>
+          <span class="badge">Entity Framework</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap">
+    <div class="contact-panel">
+      <div class="eyebrow">Hablemos</div>
+      <h2>¿Tu negocio necesita un sistema de ventas que funcione?</h2>
+      <p>Cuéntame cómo vendes hoy y te digo qué sistema tiene sentido construir.</p>
+      <div class="contact-links">
+        <a href="https://wa.me/51950654906" target="_blank" rel="noopener">📱 +51 950 654 906</a>
+        <a href="mailto:quispccentey@gmail.com">✉️ quispccentey@gmail.com</a>
+        <a href="https://github.com/Quispee" target="_blank" rel="noopener">⌥ github.com/Quispee</a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener">in LinkedIn — Pelayo Quispe</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 SKILL SOFWARE · Sistemas de ventas para negocios</p>
+</footer>
+
+<script>
+  /* mock chart bars */
+  const chartVals = [40,65,50,80,60,95];
+  const chartEl = document.getElementById('mockChart');
+  chartVals.forEach((v,i) => {
+    const bar = document.createElement('div');
+    bar.className = 'mock-bar';
+    bar.style.height = v + '%';
+    bar.style.animationDelay = (i * 0.08) + 's';
+    chartEl.appendChild(bar);
+  });
+
+  /* ---------- Catalog + modal ---------- */
+  const packages = [
+    {
+      method:'POST', methodClass:'post', path:'/sistema-gestion-ventas',
+      title:'Sistema de Gestión de Ventas e Inventario',
+      teaser:'Ventas, stock y caja controlados a mano — pérdida de tiempo y dinero.',
+      problem:'Ventas, stock y caja controlados a mano en Excel o cuadernos: pérdidas por desorden, sin reportes reales de qué se vende y qué falta.',
+      entregables:['Backend en Laravel o .NET con API REST','Panel administrativo (Angular)','Base de datos relacional (MySQL / SQL Server)','Reportes de ventas, stock y caja'],
+      model:'Modelo: pago único por proyecto + mantenimiento mensual opcional',
+      client:'Ideal para: tiendas, restaurantes, pymes de servicios'
+    },
+    {
+      method:'AUTOMATE', methodClass:'auto', path:'/automatizacion-bots',
+      title:'Automatización de Procesos con Bots',
+      teaser:'Tiempo perdido respondiendo lo mismo: pedidos, recordatorios, seguimiento.',
+      problem:'Tiempo perdido respondiendo lo mismo una y otra vez: pedidos, recordatorios, confirmaciones y seguimiento manual por chat.',
+      entregables:['Bot de Telegram/WhatsApp conectado a tu backend','Automatización de notificaciones y pedidos','Integración con tu base de datos actual','Panel simple de monitoreo de mensajes'],
+      model:'Modelo: fee de implementación + suscripción mensual (SaaS)',
+      client:'Ideal para: delivery, agencias, atención al cliente'
+    },
+    {
+      method:'GET', methodClass:'get', path:'/integracion-apis',
+      title:'Integración y Documentación de APIs',
+      teaser:'Tus sistemas no se hablan entre sí: todo se cruza a mano.',
+      problem:'Sistemas que no se hablan entre sí: tu ecommerce, tu facturación y tu CRM viven en islas separadas y todo se cruza a mano.',
+      entregables:['Integración de APIs REST entre tus sistemas','Documentación completa (Swagger / Postman)','Pruebas unitarias de cada integración','Manual de uso para tu equipo'],
+      model:'Modelo: cotización por alcance o por horas',
+      client:'Ideal para: empresas con varios sistemas ya instalados'
+    },
+    {
+      method:'PUT', methodClass:'put', path:'/panel-administrativo',
+      title:'Panel Administrativo / Portal Web a Medida',
+      teaser:'La información del negocio repartida en archivos, chats y memoria.',
+      problem:'No hay un solo lugar donde ver cómo va el negocio: la información está repartida en archivos, chats y memoria de alguien.',
+      entregables:['Frontend a medida (Angular)','Backend en Java/Spring Boot o .NET','Base de datos + modelado relacional (ERD)','Configuración y despliegue en servidor'],
+      model:'Modelo: pago único + mantenimiento opcional',
+      client:'Ideal para: emprendedores y empresas en crecimiento'
+    }
+  ];
+
+  const grid = document.getElementById('catalogGrid');
+  packages.forEach((p, idx) => {
+    const card = document.createElement('button');
+    card.className = 'endpoint-card';
+    card.setAttribute('type','button');
+    card.innerHTML = `
+      <div class="card-top">
+        <span class="method ${p.methodClass}">${p.method}</span>
+        <span class="path">${p.path}</span>
+      </div>
+      <div class="endpoint-title">${p.title}</div>
+      <p class="card-teaser">${p.teaser}</p>
+      <span class="card-cta">Ver detalle →</span>
+    `;
+    card.addEventListener('click', () => openModal(idx));
+    grid.appendChild(card);
+  });
+
+  const overlay = document.getElementById('modalOverlay');
+  const modalMethod = document.getElementById('modalMethod');
+  const modalPath = document.getElementById('modalPath');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalProblem = document.getElementById('modalProblem');
+  const modalEntregables = document.getElementById('modalEntregables');
+  const modalModel = document.getElementById('modalModel');
+  const modalClient = document.getElementById('modalClient');
+  let lastFocused = null;
+
+  function openModal(idx){
+    const p = packages[idx];
+    modalMethod.textContent = p.method;
+    modalMethod.className = 'method ' + p.methodClass;
+    modalPath.textContent = p.path;
+    modalTitle.textContent = p.title;
+    modalProblem.textContent = p.problem;
+    modalEntregables.innerHTML = p.entregables.map(e => `<li>${e}</li>`).join('');
+    modalModel.textContent = p.model;
+    modalClient.textContent = p.client;
+    lastFocused = document.activeElement;
+    overlay.hidden = false;
+    document.body.style.overflow = 'hidden';
+    document.getElementById('modalClose').focus();
+  }
+  function closeModal(){
+    overlay.hidden = true;
+    document.body.style.overflow = '';
+    if(lastFocused) lastFocused.focus();
+  }
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if(e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && !overlay.hidden) closeModal(); });
+</script>
+
+</body>
+</html>
